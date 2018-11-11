@@ -8,10 +8,10 @@ let simpleResponse = (conv, speech, display) => {
   }));
 }
 
-let basicCard = (conv, item, speech, display, cardText, subtitle, title, url, alt) => {
+let basicCard = (conv, item, speech, display, text, subtitle, title, url, alt) => {
   simpleResponse(conv, speech, display);
   conv.ask(new BasicCard({
-    text: cardText,
+    text: text,
     subtitle: subtitle,
     title: title,
     image: new Image({
