@@ -9,8 +9,18 @@ let findSpeaker = (app, speakers, currentSpeaker) => {
       }
     }
     let speech = 'Here are some information about: ' + currentSpeaker.name;
-    let text = 'Here are some information about: ' + currentSpeaker.name;
-    cards.basicCard(conv, currentSpeaker, speech, text);
+    let display = 'Here are some information about: ' + currentSpeaker.name;
+    cards.basicCard(
+      conv, 
+      currentSpeaker, 
+      speech, 
+      display, 
+      currentSpeaker.description, 
+      currentSpeaker.theme, 
+      currentSpeaker.name, 
+      currentSpeaker.photo, 
+      currentSpeaker.name
+    );
   });
 }
 
@@ -46,8 +56,18 @@ let selectSpeaker = (app, speakers, SELECTED_ITEM_RESPONSES) => {
     if (option && SELECTED_ITEM_RESPONSES.hasOwnProperty(option)) {
       let speaker_key = SELECTED_ITEM_RESPONSES[option];
       let speech = 'Here are some information about: ' + speakers[speaker_key].name;
-      let text = 'Here are some information about: ' + speakers[speaker_key].name;
-      cards.basicCard(conv, speakers[speaker_key], speech, text);
+      let display = 'Here are some information about: ' + speakers[speaker_key].name;
+      cards.basicCard(
+        conv, 
+        speakers[speaker_key], 
+        speech, 
+        display,
+        speakers[speaker_key].description, 
+        speakers[speaker_key].theme, 
+        speakers[speaker_key].name, 
+        speakers[speaker_key].photo, 
+        speakers[speaker_key].name
+      );
     } else {
       response = 'You selected an unknown item from the list or carousel';
       conv.ask(response);
@@ -69,7 +89,7 @@ let speakersQuestions = (app, db) => {
   const ref = db.ref("Speakers");
   ref.once("value", function(snapshot) {
     speakers = snapshot.val();
-    console.log("speakers devfest: " + JSON.stringify(speakers));
+    // console.log("speakers devfest: " + JSON.stringify(speakers));
     findSpeaker(app, speakers, currentSpeaker);
     speakersList(app, speakers, speakers_list);
     selectSpeaker(app, speakers, SELECTED_ITEM_RESPONSES)

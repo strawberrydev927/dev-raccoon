@@ -1,22 +1,22 @@
 const {BasicCard, Image, SimpleResponse, List} = require('actions-on-google');
 
-let simpleResponse = (conv, speech, text) => {
-  console.log("simple response module");
+let simpleResponse = (conv, speech, display) => {
+  // console.log("simple response module");
   conv.ask(new SimpleResponse({
       speech: speech,
-      text: text,
+      text: display,
   }));
 }
 
-let basicCard = (conv, item, speech, text) => {
-  simpleResponse(conv, speech, text);
+let basicCard = (conv, item, speech, display, cardText, subtitle, title, url, alt) => {
+  simpleResponse(conv, speech, display);
   conv.ask(new BasicCard({
-    text: item.description,
-    subtitle: item.theme,
-    title: item.name,
+    text: cardText,
+    subtitle: subtitle,
+    title: title,
     image: new Image({
-    url: item.photo,
-    alt: item.name,
+    url: url,
+    alt: alt,
     }),
     display: 'WHITE',
   }));
